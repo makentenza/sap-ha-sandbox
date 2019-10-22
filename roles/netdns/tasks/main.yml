@@ -1,0 +1,27 @@
+- name: Configure CloudFlare as DNS
+  shell: 'nmcli con mod "System eth0" ipv4.dns "1.1.1.1"'
+
+- name: Configure DNS Search
+  shell: 'nmcli con mod "System eth0" ipv4.dns-search "mak.local"'
+
+- name: Prevent NetworkManager to get DNS entries from DHCP
+  lineinfile:
+    path: /etc/sysconfig/network-scripts/ifcfg-eth0
+    regexp: '^PEERDNS='
+    line: 'PEERDNS=no'
+
+- name: Configure system hostname with Ansible Inventory hostname
+  shell: hostnamectl set-hostname {{ inventory_hostname }}
+
+# Having an issue right now -- failed to import the required python library (networkmanager glib api)
+# Related Issue -- https://github.com/ansible/ansible/issues/48055
+# - name: Configure CloudFlare as DNS
+#   nmcli:
+#     conn_name: 'System eth0'
+#     type: ethernet
+#     dns4:
+#     - 1.1.1.1
+#     state: present
+
+- name: Restart host
+  reboot:
