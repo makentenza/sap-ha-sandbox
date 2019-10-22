@@ -1,0 +1,2 @@
+ansible_user: cloud-user
+ansible_become: true

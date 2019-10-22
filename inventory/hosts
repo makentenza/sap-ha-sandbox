@@ -1,0 +1,16 @@
+[ascs]
+nwpnode1.mak.local
+
+[ers]
+nwpnode2.mak.local
+
+[paas]
+nwppas.mak.local
+
+[aas]
+nwpaas.mak.local
+
+[hana]
+nwphana1.mak.local
+nwphana2.mak.local
+
